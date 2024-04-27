@@ -1,0 +1,24 @@
+{
+  "ModId": "p5rpc.flowscriptframework",
+  "ModName": "Flowscript Framework",
+  "ModAuthor": "SecreC.",
+  "ModVersion": "1.0.0",
+  "ModDescription": "A library that allows mod creators to use custom flowscript functions without replacing existing ones, and provides a way to resolve conflicts",
+  "ModDll": "p5rpc.flowscriptframework.dll",
+  "ModIcon": "Preview.png",
+  "ModR2RManagedDll32": "x86/p5rpc.flowscriptframework.dll",
+  "ModR2RManagedDll64": "x64/p5rpc.flowscriptframework.dll",
+  "ModNativeDll32": "",
+  "ModNativeDll64": "",
+  "IsLibrary": true,
+  "ReleaseMetadataFileName": "p5rpc.flowscriptframework.ReleaseMetadata.json",
+  "PluginData": {},
+  "IsUniversalMod": false,
+  "ModDependencies": [
+    "Reloaded.Memory.SigScan.ReloadedII",
+    "reloaded.sharedlib.hooks"
+  ],
+  "OptionalDependencies": [],
+  "SupportedAppId": [ "p5r.exe" ],
+  "ProjectUrl": ""
+}
