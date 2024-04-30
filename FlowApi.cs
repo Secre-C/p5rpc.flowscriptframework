@@ -64,7 +64,6 @@ internal unsafe class FlowApi : IFlowApi
 
     public string GetStringArg(int index)
     {
-        nint commandData = (nint)_flowData->commandData;
         int argDataIndex = _flowData->commandData->unk2c - index - 1;
 
         if (argDataIndex > 0x2f)
@@ -105,13 +104,13 @@ internal unsafe class FlowApi : IFlowApi
         internal int unk2c;
 
         [FieldOffset(0x30)]
-        internal fixed byte ArgTypes[0x30];
+        internal fixed byte ArgTypes[0x2f];
 
         [FieldOffset(0x5f)]
         internal FlowReturnType ReturnType;
 
         [FieldOffset(0x60)]
-        internal fixed long ArgData[0x30];
+        internal fixed long ArgData[0x2f];
 
         [FieldOffset(0x1d8)]
         internal long ReturnValue;

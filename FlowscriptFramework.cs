@@ -2,7 +2,6 @@
 using p5rpc.flowscriptframework.structs;
 using p5rpc.flowscriptframework.Utils;
 using Reloaded.Hooks.Definitions;
-using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -15,11 +14,16 @@ internal class FlowscriptFramework
 
     private delegate FlowStatus d_flowFunction();
 
+    private delegate FlowFunctionInfo d_GetFlowFunction(ushort scriptTableSectionId, ushort scriptFunctionIndex, FlowFunctionInfo p_flowFunctionInfo);
+    private d_GetFlowFunction _getFlowFunction;
+
+    private const ushort HIGHEST_VANILLA_ID = 0x5007;
     internal unsafe FlowscriptFramework(IReloadedHooks hooks)
     {
         _hooks = hooks;
         Functions = new Dictionary<ushort, FlowFunction>();
         FunctionCallHook = new List<AsmHookWrapper>();
+        _getFlowFunction = GetFlowFunction;
 
         Scanner.SigScan("48 8B 00 FF D0", "ExecuteFlowFunction", (result) => // 0x1416e7b3f
         {
@@ -31,7 +35,7 @@ internal class FlowscriptFramework
                 "mov rcx, rsi",
                 "mov rdx, rbp",
                 "mov r8, rax",
-                hooks.Utilities.GetAbsoluteCallMnemonics(GetFlowFunction, out var reverseWrapper),
+                hooks.Utilities.GetAbsoluteCallMnemonics(_getFlowFunction, out var reverseWrapper),
                 Memory.PopCallerRegisters,
                 "add rsp, 0x20",
             };
@@ -52,7 +56,7 @@ internal class FlowscriptFramework
                 "mov rcx, rsi",
                 "mov rdx, rbp",
                 "mov r8, rdi",
-                hooks.Utilities.GetAbsoluteCallMnemonics(GetFlowFunction, out var reverseWrapper),
+                hooks.Utilities.GetAbsoluteCallMnemonics(_getFlowFunction, out var reverseWrapper),
                 Memory.PopCallerRegisters,
                 "mov rdi, rax",
                 "add rsp, 0x20",
@@ -65,15 +69,16 @@ internal class FlowscriptFramework
         });
     }
 
-    internal ushort Register(string functionName, int argCount, Func<FlowStatus> function)
+    internal ushort Register(string functionName, int argCount, Func<FlowStatus> function, ushort idOverride = 0xffff)
     {
-        var index = GenerateFunctionIndex(functionName);
+        ushort index = idOverride <= HIGHEST_VANILLA_ID ? idOverride : GenerateFunctionIndex(functionName);
         var flowFunction = new FlowFunction(functionName, argCount, function);
         d_flowFunction func = flowFunction.Invoke;
         flowFunction.FunctionInvokeWrapper = _hooks.CreateReverseWrapper(func);
+        flowFunction.NativeStruct = new FlowFunctionInfo(flowFunction);
 
         Functions.TryAdd(index, flowFunction);
-        Logger.Log($"Registered Function {functionName} with {argCount} args at index 0x{index:X8}");
+        Logger.Log($"Registered Function {functionName} with {argCount} args at index 0x{index:X4}");
         return index;
     }
 
@@ -81,20 +86,18 @@ internal class FlowscriptFramework
     {
         byte[] bytes = SHA256.HashData(Encoding.UTF8.GetBytes(functionName));
         ushort hashValue = BitConverter.ToUInt16(bytes, 0);
-        if (hashValue < 0x6000)
-            hashValue += (ushort)(0x6000 - (hashValue % 0x1000 * 0x1000));
+        if (hashValue < HIGHEST_VANILLA_ID)
+            hashValue += (ushort)(HIGHEST_VANILLA_ID - (hashValue % 0x1000 * 0x1000));
         return hashValue;
     }
 
-    private unsafe FlowFunctionInfo* GetFlowFunction(ushort scriptTableSectionId, ushort scriptFunctionIndex, FlowFunctionInfo* p_flowFunctionInfo)
+    private unsafe FlowFunctionInfo GetFlowFunction(ushort scriptTableSectionId, ushort scriptFunctionIndex, FlowFunctionInfo p_flowFunctionInfo)
     {
         ushort scriptFunctionId = (ushort)(scriptTableSectionId * 0x1000 + scriptFunctionIndex);
 
         if (Functions.TryGetValue(scriptFunctionId, out var flowFunction))
         {
-            Logger.DebugLog($"Calling Function 0x{scriptFunctionId:X} - {flowFunction.FunctionName}");
-            var flowFunctionInfo = new FlowFunctionInfo(flowFunction);
-            p_flowFunctionInfo = &flowFunctionInfo;
+            p_flowFunctionInfo = flowFunction.NativeStruct;
         }
 
         return p_flowFunctionInfo;

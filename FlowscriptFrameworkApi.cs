@@ -11,8 +11,8 @@ internal class FlowscriptFrameworkApi : IFlowFramework
         _flowApi = flowApi;
     }
 
-    public ushort Register(string functionName, int argCount, Func<FlowStatus> function)
-        => _flowscriptFramework.Register(functionName, argCount, function);
+    public ushort Register(string functionName, int argCount, Func<FlowStatus> function, ushort idOverride = 0xffff)
+        => _flowscriptFramework.Register(functionName, argCount, function, idOverride);
 
     public IFlowApi GetFlowApi() => _flowApi;
 }

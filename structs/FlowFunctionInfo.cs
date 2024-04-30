@@ -2,8 +2,9 @@
 using System.Runtime.InteropServices;
 
 namespace p5rpc.flowscriptframework.structs;
+
 [StructLayout(LayoutKind.Explicit)]
-internal unsafe struct FlowFunctionInfo
+internal unsafe class FlowFunctionInfo
 {
     [FieldOffset(0)]
     nint FunctionPointer;

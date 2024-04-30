@@ -10,6 +10,7 @@ internal unsafe class FlowFunction
     internal IFlowApi Api;
     internal Func<FlowStatus> Function;
     internal IReverseWrapper FunctionInvokeWrapper;
+    internal FlowFunctionInfo NativeStruct;
 
     internal FlowFunction(string functionName, int argCount, Func<FlowStatus> function)
     {
