@@ -1,5 +1,4 @@
-﻿using Reloaded.Hooks.Definitions;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
 namespace p5rpc.flowscriptframework.structs;
 

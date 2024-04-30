@@ -8,14 +8,14 @@ using System.Text;
 namespace p5rpc.flowscriptframework;
 internal class FlowscriptFramework
 {
-    private Dictionary<ushort, FlowFunction> Functions;
-    private List<AsmHookWrapper> FunctionCallHook;
-    private IReloadedHooks _hooks;
+    private readonly Dictionary<ushort, FlowFunction> Functions;
+    private readonly List<AsmHookWrapper> FunctionCallHook;
+    private readonly IReloadedHooks _hooks;
 
     private delegate FlowStatus d_flowFunction();
 
     private delegate FlowFunctionInfo d_GetFlowFunction(ushort scriptTableSectionId, ushort scriptFunctionIndex, FlowFunctionInfo p_flowFunctionInfo);
-    private d_GetFlowFunction _getFlowFunction;
+    private readonly d_GetFlowFunction _getFlowFunction;
 
     private const ushort HIGHEST_VANILLA_ID = 0x5007;
     internal unsafe FlowscriptFramework(IReloadedHooks hooks)

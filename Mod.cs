@@ -64,7 +64,9 @@ public class Mod : ModBase, IExports // <= Do not Remove.
         Utils.Utils.Initialize(context);
         _flowscriptFramework = new FlowscriptFramework(_hooks);
         _modLoader.AddOrReplaceController<IFlowFramework>(_owner, new FlowscriptFrameworkApi(_flowscriptFramework, FlowApi.Initialize(_hooks)));
-        _fixScriptPrintFuncs = new(_modLoader, _logger);
+
+        if (_configuration.FixScriptPrintFuncs)
+            _fixScriptPrintFuncs = new(_modLoader, _logger);
     }
 
     #region Standard Overrides

@@ -27,7 +27,13 @@ public class Config : Configurable<Config>
     [DisplayName("Debug")]
     [Description("Enables Debug Printing")]
     [DefaultValue(true)]
-    public bool Debug { get; set; } = true;
+    public bool Debug { get; set; } = false;
+
+
+    [DisplayName("Fix Script Printing Functions")]
+    [Description("Restores the functionality of the PUT/S/F script printing functions.")]
+    [DefaultValue(true)]
+    public bool FixScriptPrintFuncs { get; set; } = true;
 }
 
 /// <summary>
