@@ -9,11 +9,11 @@ internal static class Logger
 
     private static void LogAsync(string prefix, string message, Color color)
     {
-        logger.WriteAsync($"{prefix} {message}", color);
+        logger.WriteLineAsync($"{prefix} {message}", color);
     }
     private static void Log(string prefix, string message, Color color)
     {
-        logger.Write($"{prefix} {message}", color);
+        logger.WriteLine($"{prefix} {message}", color);
     }
     internal static void Log(string message, Color color)
     {
@@ -28,7 +28,7 @@ internal static class Logger
     internal static void DebugLog(string message, Color color)
     {
         if (Debug)
-            Log("\n[FlowscriptFramework DEBUG]", message, color);
+            Log("[FlowscriptFramework DEBUG]", message, color);
     }
 
     internal static void DebugLog(string message)

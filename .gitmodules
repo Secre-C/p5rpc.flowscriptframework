@@ -1,0 +1,3 @@
+[submodule "submodules/p5rpc.flowscriptframework.interfaces"]
+	path = submodules/p5rpc.flowscriptframework.interfaces
+	url = https://github.com/Secre-C/p5rpc.flowscriptframework.interfaces

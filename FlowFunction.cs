@@ -1,21 +1,25 @@
-﻿namespace p5rpc.flowscriptframework;
-internal class FlowFunction
+﻿using p5rpc.flowscriptframework.interfaces;
+using p5rpc.flowscriptframework.structs;
+using Reloaded.Hooks.Definitions;
+
+namespace p5rpc.flowscriptframework;
+internal unsafe class FlowFunction
 {
     internal string FunctionName { get; set; }
     internal int ArgCount { get; set; }
-    internal List<object> Args;
-    internal Func<List<object>, object> Function;
-    internal object ReturnValue;
+    internal IFlowApi Api;
+    internal Func<FlowStatus> Function;
+    internal IReverseWrapper FunctionInvokeWrapper;
 
-    internal FlowFunction(string functionName, int argCount, Func<List<object>, object> function)
+    internal FlowFunction(string functionName, int argCount, Func<FlowStatus> function)
     {
         FunctionName = functionName;
         ArgCount = argCount;
         Function = function;
     }
 
-    internal void Invoke()
+    internal FlowStatus Invoke()
     {
-        ReturnValue = Function.Invoke(Args);
+        return Function.Invoke();
     }
 }

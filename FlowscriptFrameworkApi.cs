@@ -1,12 +1,18 @@
-﻿namespace p5rpc.flowscriptframework;
-internal class FlowscriptFrameworkApi
+﻿using p5rpc.flowscriptframework.interfaces;
+
+namespace p5rpc.flowscriptframework;
+internal class FlowscriptFrameworkApi : IFlowFramework
 {
     private FlowscriptFramework _flowscriptFramework;
-    internal FlowscriptFrameworkApi(FlowscriptFramework flowscriptFramework)
+    private FlowApi _flowApi;
+    internal FlowscriptFrameworkApi(FlowscriptFramework flowscriptFramework, FlowApi flowApi)
     {
         _flowscriptFramework = flowscriptFramework;
+        _flowApi = flowApi;
     }
 
-    internal ushort Register(string functionName, int argCount, Func<List<object>, object> function)
-        => Register(functionName, argCount, function);
+    public ushort Register(string functionName, int argCount, Func<FlowStatus> function)
+        => _flowscriptFramework.Register(functionName, argCount, function);
+
+    public IFlowApi GetFlowApi() => _flowApi;
 }

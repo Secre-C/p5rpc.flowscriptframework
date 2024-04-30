@@ -1,4 +1,5 @@
 ﻿using p5rpc.flowscriptframework.Configuration;
+using p5rpc.flowscriptframework.interfaces;
 using p5rpc.flowscriptframework.Template;
 using Reloaded.Hooks.ReloadedII.Interfaces;
 using Reloaded.Mod.Interfaces;
@@ -7,7 +8,7 @@ namespace p5rpc.flowscriptframework;
 /// <summary>
 /// Your mod logic goes here.
 /// </summary>
-public class Mod : ModBase // <= Do not Remove.
+public class Mod : ModBase, IExports // <= Do not Remove.
 {
     /// <summary>
     /// Provides access to the mod loader API.
@@ -60,7 +61,7 @@ public class Mod : ModBase // <= Do not Remove.
         // TODO: Implement some mod logic
         Utils.Utils.Initialize(context);
         _flowscriptFramework = new FlowscriptFramework(_hooks);
-        _modLoader.AddOrReplaceController(_owner, _flowscriptFramework);
+        _modLoader.AddOrReplaceController<IFlowFramework>(_owner, new FlowscriptFrameworkApi(_flowscriptFramework, FlowApi.Initialize(_hooks)));
     }
 
     #region Standard Overrides
@@ -71,6 +72,8 @@ public class Mod : ModBase // <= Do not Remove.
         _configuration = configuration;
         _logger.WriteLine($"[{_modConfig.ModId}] Config Updated: Applying");
     }
+
+    public Type[] GetTypes() => new[] { typeof(IFlowFramework) };
     #endregion
 
     #region For Exports, Serialization etc.

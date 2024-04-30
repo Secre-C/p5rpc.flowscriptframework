@@ -2,16 +2,20 @@
 using System.Runtime.InteropServices;
 
 namespace p5rpc.flowscriptframework.structs;
+[StructLayout(LayoutKind.Explicit)]
 internal unsafe struct FlowFunctionInfo
 {
+    [FieldOffset(0)]
     nint FunctionPointer;
-    long ArgCount;
+    [FieldOffset(8)]
+    int ArgCount;
+    [FieldOffset(0x10)]
     nint FunctionName;
 
     internal FlowFunctionInfo(FlowFunction flowFunction)
     {
         FunctionName = Marshal.StringToHGlobalAnsi(flowFunction.FunctionName);
         ArgCount = flowFunction.ArgCount;
-        FunctionPointer = 0;
+        FunctionPointer = flowFunction.FunctionInvokeWrapper.NativeFunctionPtr;
     }
 }
