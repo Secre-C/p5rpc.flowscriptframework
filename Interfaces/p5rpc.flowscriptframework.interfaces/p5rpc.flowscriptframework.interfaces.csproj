@@ -1,9 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+	<TargetFramework>net7.0</TargetFramework>
+	<ImplicitUsings>enable</ImplicitUsings>
+	<Nullable>enable</Nullable>
+	<PackageId>p5rpc.flowscriptframework.interfaces</PackageId>
+	<Version>1.0.0</Version>
+	<Authors>Secre-C</Authors>
+	<PackageIcon>preview.png</PackageIcon>
+	<PackageReadmeFile>readme.md</PackageReadmeFile>
+	<PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
   </PropertyGroup>
+
+	<ItemGroup>
+		<None Include="../../preview.png" Pack="true" PackagePath="\"/>
+		<None Include="../../readme.md" Pack="true" PackagePath="\"/>
+	</ItemGroup>
 
 </Project>
