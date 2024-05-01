@@ -24,14 +24,14 @@ internal class FixPUTFuncs
         flowFramework.Register("PUTS", 1, () =>
         {
             var api = flowFramework.GetFlowApi();
-            Log(api.GetIntArg(0).ToString());
+            Log(api.GetStringArg(0));
             return FlowStatus.SUCCESS;
         }, 3);
 
         flowFramework.Register("PUTF", 1, () =>
         {
             var api = flowFramework.GetFlowApi();
-            Log(api.GetIntArg(0).ToString());
+            Log(api.GetFloatArg(0).ToString());
             return FlowStatus.SUCCESS;
         }, 4);
     }
