@@ -17,8 +17,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Interfaces\**" />
     <Compile Remove="Submodules\**" />
+    <EmbeddedResource Remove="Interfaces\**" />
     <EmbeddedResource Remove="Submodules\**" />
+    <None Remove="Interfaces\**" />
     <None Remove="Submodules\**" />
   </ItemGroup>
 
@@ -55,7 +58,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="Submodules\p5rpc.flowscriptframework.interfaces\p5rpc.flowscriptframework.interfaces.csproj" />
+    <ProjectReference Include="Interfaces\p5rpc.flowscriptframework.interfaces\p5rpc.flowscriptframework.interfaces.csproj" />
   </ItemGroup>
 
 </Project>

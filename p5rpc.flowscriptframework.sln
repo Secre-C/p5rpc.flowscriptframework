@@ -5,7 +5,9 @@ VisualStudioVersion = 17.10.34804.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "p5rpc.flowscriptframework", "p5rpc.flowscriptframework.csproj", "{06E2C1D0-ADE6-4FD1-980D-390271E3A75C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "p5rpc.flowscriptframework.interfaces", "Submodules\p5rpc.flowscriptframework.interfaces\p5rpc.flowscriptframework.interfaces.csproj", "{5E900FD0-9519-4990-9013-F1A77F392A11}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interfaces", "Interfaces", "{12BA6D00-5F8A-4107-AAC1-EC7F4C7A1032}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "p5rpc.flowscriptframework.interfaces", "Interfaces\p5rpc.flowscriptframework.interfaces\p5rpc.flowscriptframework.interfaces.csproj", "{540115EA-5E5B-408C-A69D-875CC00E9A7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,13 +19,16 @@ Global
 		{06E2C1D0-ADE6-4FD1-980D-390271E3A75C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06E2C1D0-ADE6-4FD1-980D-390271E3A75C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06E2C1D0-ADE6-4FD1-980D-390271E3A75C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5E900FD0-9519-4990-9013-F1A77F392A11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5E900FD0-9519-4990-9013-F1A77F392A11}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5E900FD0-9519-4990-9013-F1A77F392A11}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5E900FD0-9519-4990-9013-F1A77F392A11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{540115EA-5E5B-408C-A69D-875CC00E9A7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{540115EA-5E5B-408C-A69D-875CC00E9A7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{540115EA-5E5B-408C-A69D-875CC00E9A7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{540115EA-5E5B-408C-A69D-875CC00E9A7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{540115EA-5E5B-408C-A69D-875CC00E9A7D} = {12BA6D00-5F8A-4107-AAC1-EC7F4C7A1032}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {31E6D7A7-B8B8-444D-89AF-8CE551090458}
