@@ -1,0 +1,25 @@
+{
+  "ModId": "FlowscriptFrameworkTest",
+  "ModName": "FlowscriptFrameworkTest",
+  "ModAuthor": "SecreC.",
+  "ModVersion": "1.0.0",
+  "ModDescription": "Description",
+  "ModDll": "FlowscriptFrameworkTest.dll",
+  "ModIcon": "Preview.png",
+  "ModR2RManagedDll32": "x86/FlowscriptFrameworkTest.dll",
+  "ModR2RManagedDll64": "x64/FlowscriptFrameworkTest.dll",
+  "ModNativeDll32": "",
+  "ModNativeDll64": "",
+  "IsLibrary": false,
+  "ReleaseMetadataFileName": "FlowscriptFrameworkTest.ReleaseMetadata.json",
+  "PluginData": {},
+  "IsUniversalMod": false,
+  "ModDependencies": [
+    "reloaded.sharedlib.hooks",
+    "p5rpc.flowscriptframework",
+    "reloaded.universal.fileemulationframework"
+  ],
+  "OptionalDependencies": [],
+  "SupportedAppId": ["p5r.exe"],
+  "ProjectUrl": ""
+}

@@ -1,0 +1,6 @@
+// Procedure Index: 0
+void f003_002_init_hook()
+{
+    PUT(SQUARE_NUMBER(69));
+	f003_002_init_unhooked();
+}

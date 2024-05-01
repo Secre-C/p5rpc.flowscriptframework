@@ -56,3 +56,5 @@ flowFramework.Register("SQUARE_NUMBER", 1, () =>
 
 ### FlowStatus
 The `FlowStatus` enum tells the game whether or not the function has completed execution. `FlowStatus.SUCCESS` indicates that the function has finished execution, and allows the game to continue executing the current script, while `FlowStatus.FAILURE` will cause the game to run the function again instead of moving on.
+
+This repo includes a test mod you may use as a reference when building your own projects.

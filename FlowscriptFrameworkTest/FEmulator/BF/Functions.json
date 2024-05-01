@@ -1,0 +1,15 @@
+[
+    {
+        "Index":  "0xEA98",
+        "ReturnType":  "int",
+        "Name":  "SQUARE_NUMBER",
+        "Description":  "",
+        "Parameters": [
+		{
+			"Type": "int",
+			"Name": "param1",
+			"Description": ""
+		}
+		]
+    }
+]
