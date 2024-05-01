@@ -17,10 +17,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="FlowscriptFrameworkTest\**" />
     <Compile Remove="Interfaces\**" />
     <Compile Remove="Submodules\**" />
+    <EmbeddedResource Remove="FlowscriptFrameworkTest\**" />
     <EmbeddedResource Remove="Interfaces\**" />
     <EmbeddedResource Remove="Submodules\**" />
+    <None Remove="FlowscriptFrameworkTest\**" />
     <None Remove="Interfaces\**" />
     <None Remove="Submodules\**" />
   </ItemGroup>
