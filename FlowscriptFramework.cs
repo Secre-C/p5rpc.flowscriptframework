@@ -86,8 +86,8 @@ internal class FlowscriptFramework
     {
         byte[] bytes = SHA256.HashData(Encoding.UTF8.GetBytes(functionName));
         ushort hashValue = BitConverter.ToUInt16(bytes, 0);
-        if (hashValue < HIGHEST_VANILLA_ID)
-            hashValue += (ushort)(HIGHEST_VANILLA_ID - (hashValue % 0x1000 * 0x1000));
+        if (hashValue <= HIGHEST_VANILLA_ID)
+            hashValue += (ushort)(HIGHEST_VANILLA_ID - (hashValue & 0xF000));
         return hashValue;
     }
 
