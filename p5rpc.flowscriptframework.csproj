@@ -19,12 +19,15 @@
   <ItemGroup>
     <Compile Remove="FlowscriptFrameworkTest\**" />
     <Compile Remove="Interfaces\**" />
+    <Compile Remove="Publish\**" />
     <Compile Remove="Submodules\**" />
     <EmbeddedResource Remove="FlowscriptFrameworkTest\**" />
     <EmbeddedResource Remove="Interfaces\**" />
+    <EmbeddedResource Remove="Publish\**" />
     <EmbeddedResource Remove="Submodules\**" />
     <None Remove="FlowscriptFrameworkTest\**" />
     <None Remove="Interfaces\**" />
+    <None Remove="Publish\**" />
     <None Remove="Submodules\**" />
   </ItemGroup>
 
