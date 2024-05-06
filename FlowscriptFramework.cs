@@ -17,7 +17,6 @@ internal class FlowscriptFramework
     private delegate FlowFunctionInfo d_GetFlowFunction(ushort scriptTableSectionId, ushort scriptFunctionIndex, FlowFunctionInfo p_flowFunctionInfo);
     private readonly d_GetFlowFunction _getFlowFunction;
 
-    private const ushort HIGHEST_VANILLA_ID = 0x5007;
     internal unsafe FlowscriptFramework(IReloadedHooks hooks)
     {
         _hooks = hooks;
@@ -71,7 +70,8 @@ internal class FlowscriptFramework
 
     internal ushort Register(string functionName, int argCount, Func<FlowStatus> function, ushort idOverride = 0xffff)
     {
-        ushort index = idOverride <= HIGHEST_VANILLA_ID ? idOverride : GenerateFunctionIndex(functionName);
+
+        ushort index = IsVanillaFunction(idOverride) ? idOverride : GenerateFunctionIndex(functionName);
         var flowFunction = new FlowFunction(functionName, argCount, function);
         d_flowFunction func = flowFunction.Invoke;
         flowFunction.FunctionInvokeWrapper = _hooks.CreateReverseWrapper(func);
@@ -86,9 +86,32 @@ internal class FlowscriptFramework
     {
         byte[] bytes = SHA256.HashData(Encoding.UTF8.GetBytes(functionName));
         ushort hashValue = BitConverter.ToUInt16(bytes, 0);
-        if (hashValue <= HIGHEST_VANILLA_ID)
-            hashValue += (ushort)(HIGHEST_VANILLA_ID - (hashValue & 0xF000));
+
+        while (IsVanillaFunction(hashValue))
+        {
+            bytes = SHA256.HashData(bytes);
+            hashValue = BitConverter.ToUInt16(bytes, 0);
+        }
+
         return hashValue;
+    }
+
+    private static bool IsVanillaFunction(ushort index)
+    {
+        var section = index & 0xF000;
+        ushort[] highestVanillaIds = {
+            0x01a7,
+            0x1390,
+            0x21cc,
+            0x30b5,
+            0x40ae,
+            0x5007
+        };
+
+        if (section >= highestVanillaIds.Length || index > highestVanillaIds[section])
+            return false;
+
+        return true;
     }
 
     private unsafe FlowFunctionInfo GetFlowFunction(ushort scriptTableSectionId, ushort scriptFunctionIndex, FlowFunctionInfo p_flowFunctionInfo)
