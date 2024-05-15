@@ -6,8 +6,8 @@ Flowscript Framework is a Reloaded-II mod that allows modders to easily add new 
 Download the `p5rpc.flowscriptframework.interfaces` package from nuget and add `p5rpc.flowscriptframework` as a dependency in your mods `ModConfig.json`, Then add this code to your mods mod.cs file:
 
 ``` C#
-var flowFrameworkontroller = _modLoader.GetController<IFlowFramework>();
-if (flowFrameworkontroller == null || !flowFrameworkontroller.TryGetTarget(out var flowFramework))
+var flowFrameworkController = _modLoader.GetController<IFlowFramework>();
+if (flowFrameworkController == null || !flowFrameworkController.TryGetTarget(out var flowFramework))
 {
     throw new Exception("Failed to get IFlowFramework Controller");
 }
