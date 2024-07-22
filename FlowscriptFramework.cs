@@ -70,7 +70,6 @@ internal class FlowscriptFramework
 
     internal ushort Register(string functionName, int argCount, Func<FlowStatus> function, ushort idOverride = 0xffff)
     {
-
         ushort index = IsVanillaFunction(idOverride) ? idOverride : GenerateFunctionIndex(functionName);
         var flowFunction = new FlowFunction(functionName, argCount, function);
         d_flowFunction func = flowFunction.Invoke;
@@ -84,21 +83,21 @@ internal class FlowscriptFramework
 
     private static ushort GenerateFunctionIndex(string functionName)
     {
-        byte[] bytes = SHA256.HashData(Encoding.UTF8.GetBytes(functionName));
-        ushort hashValue = BitConverter.ToUInt16(bytes, 0);
+        ushort hashValue;
 
-        while (IsVanillaFunction(hashValue))
+        byte[] bytes = Encoding.UTF8.GetBytes(functionName);
+        do
         {
             bytes = SHA256.HashData(bytes);
-            hashValue = BitConverter.ToUInt16(bytes, 0);
-        }
+           hashValue = BitConverter.ToUInt16(bytes, 0);
+        } while (IsVanillaFunction(hashValue));
 
         return hashValue;
     }
 
     private static bool IsVanillaFunction(ushort index)
     {
-        var section = index & 0xF000;
+        var section = (index & 0xF000) >> 0xc;
         ushort[] highestVanillaIds = {
             0x01a7,
             0x1390,
